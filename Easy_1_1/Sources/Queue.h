@@ -3,27 +3,21 @@
 //
 
 #include <string>
-
-#ifndef EASY_1_1_QUEUE_H
-#define EASY_1_1_QUEUE_H
-
+#pragma once
 
 class Queue {
 public:
-    Queue();
-    Queue(int a);
+    Queue(int a = k_default_size);
     void Push(std::string b);
 
-    int Size();
-    int ContainedNumber();
+    int Size() const;
+    int ContainedNumber() const;
     void Pop();
     std::string* Back();
 private:
-    int MaxSize = 17;
+    static constexpr int k_default_size = 17;
+    int max_size = 17;
     int counter;
     std::string* queue;
 
 };
-
-
-#endif //EASY_1_1_QUEUE_H

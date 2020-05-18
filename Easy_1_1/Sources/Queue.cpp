@@ -2,44 +2,46 @@
 // Created by USER on 09.03.2020.
 //
 
+#include <stdexcept>
 #include "Queue.h"
-
-Queue::Queue()
-{
-    this -> queue = new std::string[this->MaxSize];
-    this -> counter = 0;
-}
 
 Queue::Queue(int a)
 {
-    this -> MaxSize = a;
-    this -> queue = new std::string[this -> MaxSize];
+    this -> max_size = a;
+    this -> queue = new std::string[this -> max_size];
     this -> counter = 0;
 }
 
 void Queue::Push(std::string b)
 {
-    if (this -> counter < MaxSize)
+    if (this -> counter < max_size)
     {
-        this -> counter++;
-        this -> queue[this -> counter - 1] = std::move(b);
+        this -> queue[this -> counter++] = std::move(b);
     } else
-        throw std::exception("Queue Overflow");
+    {
+        throw std::length_error("Queue Overflow");
+    }
 }
 
-int Queue::Size()
+int Queue::Size() const
 {
-    return this -> MaxSize;
+    return this -> max_size;
 }
 
-int Queue::ContainedNumber()
+int Queue::ContainedNumber() const
 {
     return this -> counter;
 }
 
 std::string* Queue::Back()
 {
-    return &this -> queue[0];
+    if (this -> counter > 0)
+    {
+        return &this -> queue[0];
+    } else
+    {
+        throw std::length_error("Queue is empty");
+    }
 }
 
 void Queue::Pop()
@@ -48,6 +50,5 @@ void Queue::Pop()
     {
         this -> queue[i] = this -> queue[i + 1];
     }
-    this -> queue[this -> counter - 1] = "";
     this -> counter--;
 }
