@@ -7,7 +7,7 @@
 
 class Queue {
 public:
-    Queue(int a = k_default_size);
+    Queue(int a = 17);
     void Push(std::string b);
 
     int Size() const;
@@ -15,7 +15,6 @@ public:
     void Pop();
     std::string* Back();
 private:
-    static constexpr int k_default_size = 17;
     int max_size = 17;
     int counter;
     std::string* queue;
